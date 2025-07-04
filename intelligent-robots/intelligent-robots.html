@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Robots - Bootstrap</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* ==================== VARIABLES CSS ==================== */
+        :root {
+            --primary-color: #e30613;
+            --secondary-color: #111111;
+            --text-color: #333333;
+            --light-text: #aaa;
+            --white: #fff;
+            --black: #000000;
+            --dark-blue: #151e39;
+            --modal-blue: #192040;
+            --content-blue: #263562;
+        }
+
+        /* ==================== ESTILOS GENERALES ==================== */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* ==================== BARRA SUPERIOR ==================== */
+        .top-bar {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .top-bar a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .top-bar a:hover {
+            opacity: 0.8;
+        }
+
+        .language {
+            font-weight: 500;
+        }
+
+        /* ==================== NAVEGACIÓN PRINCIPAL ==================== */
+        .main-nav {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+            padding: 12px 0;
+        }
+
+        .navbar-brand img {
+            max-height: 40px;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--white) !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            padding: 10px 15px !important;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-toggler {
+            border-color: var(--white);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/FONDO.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 500;
+            text-transform: uppercase;
+            padding: 12px 30px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* ==================== SECCIÓN DE ESTADÍSTICAS ==================== */
+        .stats-section {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 60px 0;
+        }
+
+        .stat-number {
+            font-size: 3.75rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .stat-description {
+            font-size: 1rem;
+            line-height: 1.4;
+            font-weight: 400;
+            color: var(--white);
+        }
+
+        /* ==================== SECCIÓN DE IA (3 IMÁGENES) ==================== */
+        .ia-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/12;
+        }
+
+        .ia-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .ia-card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .ia-card-description {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .ia-card:hover img {
+            transform: scale(1.15);
+        }
+
+        .ia-card:hover .ia-card-title {
+            background: rgba(227, 6, 19, 0.9);
+        }
+
+        .ia-card a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+        }
+
+        /* ==================== DESCRIPCIÓN INTELLIGENT ROBOTS ==================== */
+        .airobots-desc-section {
+            padding: 60px 0 40px 0;
+        }
+
+        .airobots-desc {
+            font-size: 1.9em;
+            color: var(--content-blue);
+            text-align: center;
+            line-height: 1.15;
+            font-weight: 400;
+        }
+
+        .airobots-bold-underline {
+            font-weight: 700;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 2px;
+            margin-bottom: 4px;
+        }
+
+        /* ==================== ESTRATEGIA GLOBAL ==================== */
+        .global-strategy-section {
+            position: relative;
+            min-height: 400px;
+            background: linear-gradient(rgba(22, 28, 52, 0.78), rgba(22, 28, 52, 0.78)), url('https://airtificial.com/intelligent-robots/wp-content/uploads/sites/2/2021/07/iStock-1271613373-1366x768.jpeg') center center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            margin-top: 50px;
+            padding: 60px 0;
+            color: var(--white);
+        }
+
+        .global-strategy-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .global-strategy-bar {
+            width: 40px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+            margin-bottom: 28px;
+        }
+
+        .global-strategy-text {
+            font-size: 1em;
+            font-weight: 400;
+            margin-bottom: 32px;
+        }
+
+        .global-strategy-btn {
+            background: #6c7896;
+            color: var(--white);
+            font-size: 1.25em;
+            font-weight: 500;
+            padding: 18px 44px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .global-strategy-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* ==================== MODAL ESTRATEGIA ==================== */
+        .modal-estrategia .modal-content {
+            background: var(--modal-blue);
+            color: var(--white);
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        }
+
+        .modal-estrategia .modal-header {
+            border-bottom: none;
+            padding: 40px 48px 20px 48px;
+        }
+
+        .modal-estrategia .modal-title {
+            font-size: 2.4em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal-estrategia .modal-body {
+            padding: 0 48px 32px 48px;
+        }
+
+        .modal-estrategia-bar {
+            width: 40px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+
+        .modal-estrategia h3 {
+            font-size: 1.25em;
+            font-weight: 700;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+
+        .modal-estrategia ul {
+            margin: 0 0 16px 0;
+            padding-left: 18px;
+        }
+
+        .modal-estrategia li {
+            margin-bottom: 4px;
+            font-size: 1em;
+        }
+
+        .modal-estrategia p {
+            font-size: 1em;
+            margin-bottom: 12px;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 2.5em;
+            color: #6c7896;
+            cursor: pointer;
+            font-weight: 700;
+            transition: color 0.2s;
+            opacity: 1;
+        }
+
+        .btn-close:hover {
+            color: var(--primary-color);
+            opacity: 1;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-logo img {
+            height: 48px;
+            margin-bottom: 15px;
+        }
+
+        .footer-description {
+            color: var(--white);
+            font-size: 0.95em;
+            line-height: 1.5;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+
+        .footer-description strong,
+        .footer-description b {
+            font-weight: 700;
+        }
+
+        .footer h4 {
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer li {
+            margin-bottom: 12px;
+        }
+
+        .footer a {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.08em;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 18px;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .global-strategy-title {
+                font-size: 2em;
+            }
+            
+            .airobots-desc {
+                font-size: 1.5em;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .modal-estrategia .modal-header,
+            .modal-estrategia .modal-body {
+                padding: 20px 15px;
+            }
+            
+            .modal-estrategia .modal-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra Superior -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="contact-info">
+                        <span><i class="fas fa-envelope me-1"></i> info@intelligentrobots.com</span>
+                        <span><i class="fas fa-phone me-1"></i> +1 (555) 123-4567</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-end">
+                        <div class="secondary-menu">
+                            <a href="#" class="me-3">Contacto</a>
+                            <a href="#" class="language">ES</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación Principal -->
+    <nav class="navbar navbar-expand-lg main-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://airtificial.com/intelligent-robots/wp-content/uploads/sites/2/2021/10/intelligent-robots-h.svg" alt="Logo" class="logo-placeholder">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../maestro/index.html">Inicio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1>Robots Inteligentes para el Futuro</h1>
+                        <p>Transformamos la manera en que las empresas operan con tecnología robótica avanzada y soluciones de inteligencia artificial de vanguardia.</p>
+                        <a href="#" class="btn btn-primary btn-lg">Descubrir Más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Estadísticas -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-description">Robots implementados exitosamente en empresas líderes</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-description">Tasa de satisfacción del cliente con nuestras soluciones</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-description">Soporte técnico continuo para todos nuestros clientes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de IA (3 Imágenes) -->
+    <section class="ia-section">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-4">
+                    <div class="ia-card">
+                        <a href="#">
+                            <img src="img/1.jpg" alt="IA Industrial">
+                            <div class="ia-card-title">
+                                Inteligencia Artificial Industrial
+                                <div class="ia-card-description">
+                                    Automatización avanzada para procesos industriales
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ia-card">
+                        <a href="#">
+                            <img src="img/2.jpg" alt="Robótica Médica">
+                            <div class="ia-card-title">
+                                Robótica Médica
+                                <div class="ia-card-description">
+                                    Soluciones robóticas para el sector salud
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ia-card">
+                        <a href="#">
+                            <img src="img/3.jpg " alt="IA Doméstica">
+                            <div class="ia-card-title">
+                                IA Doméstica
+                                <div class="ia-card-description">
+                                    Asistentes inteligentes para el hogar
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Descripción Intelligent Robots -->
+    <section class="airobots-desc-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="airobots-desc">
+                        Los <span class="airobots-bold-underline">robots inteligentes</span> están revolucionando la forma en que vivimos y trabajamos, ofreciendo soluciones innovadoras para un futuro más eficiente.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estrategia Global -->
+    <section class="global-strategy-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="global-strategy-title">Estrategia Global</h2>
+                    <div class="global-strategy-bar"></div>
+                    <p class="global-strategy-text">
+                        Nuestra estrategia global se enfoca en desarrollar soluciones robóticas que transformen industrias completas, 
+                        combinando inteligencia artificial avanzada con diseño innovador para crear un impacto positivo a nivel mundial.
+                    </p>
+                    <a href="#" class="global-strategy-btn" data-bs-toggle="modal" data-bs-target="#estrategiaModal">
+                        Leer Más
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Estrategia Global -->
+    <div class="modal fade modal-estrategia" id="estrategiaModal" tabindex="-1" aria-labelledby="estrategiaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h2 class="modal-title" id="estrategiaModalLabel">Estrategia Global</h2>
+                        <div class="modal-estrategia-bar"></div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h3>Pilares Fundamentales</h3>
+                    <ul>
+                        <li>Investigación y desarrollo continuo en inteligencia artificial</li>
+                        <li>Colaboración con universidades y centros de investigación</li>
+                        <li>Implementación de estándares de calidad internacionales</li>
+                        <li>Sostenibilidad y responsabilidad ambiental</li>
+                    </ul>
+                    
+                    <h3>Objetivos a Largo Plazo</h3>
+                    <p>Convertirse en el líder mundial en soluciones robóticas inteligentes, estableciendo nuevos estándares en la industria y mejorando la calidad de vida de las personas a través de la tecnología.</p>
+                    
+                    <h3>Mercados Objetivo</h3>
+                    <ul>
+                        <li>Manufactura y automatización industrial</li>
+                        <li>Sector salud y medicina</li>
+                        <li>Logística y transporte</li>
+                        <li>Educación y investigación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="footer-logo">
+                        <img src="https://airtificial.com/wp-content/themes/airtificial/img/logo-positive.svg" alt="Logo">
+                    </div>
+                    <div class="footer-description">
+                        <strong>Intelligent Robots</strong> es una empresa líder en el desarrollo de soluciones robóticas avanzadas. 
+                        Nuestro equipo de expertos trabaja incansablemente para crear tecnologías que <b>transformen industrias</b> 
+                        y mejoren la vida de las personas a través de la innovación en inteligencia artificial y robótica.
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="../maestro/index.html">Inicio</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2024 Intelligent Robots. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="social-links text-md-end">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // El modal ya funciona con Bootstrap, pero mantenemos compatibilidad con el código original
+        document.addEventListener('DOMContentLoaded', function() {
+            // Bootstrap se encarga del modal automáticamente
+            console.log('Intelligent Robots Bootstrap version loaded');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitio Web con Bootstrap</title>
+
+    <!-- CSS PROPIO -->
+    <link href="styles.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Variables CSS personalizadas */
+        :root {
+            --primary-color: #e30613;
+            --secondary-color: #111;
+        }
+        
+        /* Estilos personalizados que Bootstrap no puede manejar */
+        .custom-primary { background-color: var(--primary-color) !important; }
+        .custom-primary-text { color: var(--primary-color) !important; }
+        .custom-secondary { background-color: var(--secondary-color) !important; }
+        
+        /* Top bar personalizada */
+        .top-bar {
+            background-color: var(--primary-color);
+            font-size: 14px;
+            z-index: 1000;
+        }
+        
+        /* Navegación principal */
+        .main-nav {
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            top: 35px;
+        }
+        
+        .main-nav .navbar-brand img {
+            max-width: 180px;
+        }
+        
+        .main-nav .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 15px;
+        }
+        
+        .main-nav .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/FONDO.jpg') center/cover no-repeat;
+            padding-top: 100px;
+        }
+        
+        .hero-content h1 {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        
+        /* Botones personalizados */
+        .btn-custom-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        .btn-custom-primary:hover {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Estadísticas */
+        .stats-section {
+            background-color: var(--primary-color);
+        }
+        
+        .stat-number {
+            font-size: 100px;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .stat-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .stat-description {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        
+        /* Sección de imágenes IA */
+        .ia-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/13;
+        }
+        
+        .ia-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .ia-card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        
+        .ia-card:hover .ia-card-title {
+            background: rgba(227, 6, 19, 0.9);
+        }
+        
+        .ia-card:hover img {
+            transform: scale(1.15);
+        }
+        
+        /* Sección de noticias */
+        .news-section {
+            background: #131b34;
+        }
+        
+        .news-bar {
+            display: inline-block;
+            width: 32px;
+            height: 3px;
+            background: var(--primary-color);
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        
+        .news-tag {
+            background: #fff;
+            color: #263562;
+            font-size: 1em;
+            font-weight: 500;
+            border-radius: 20px;
+            padding: 6px 18px;
+            letter-spacing: 1px;
+        }
+        
+        .news-headline {
+            font-size: 1.5em;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        
+        .news-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 18px 0;
+            font-size: 1.25em;
+            font-weight: 500;
+            width: 200px;
+            transition: background 0.2s;
+        }
+        
+        .news-btn:hover {
+            background: #b8000a;
+        }
+        
+        /* Footer personalizado */
+        .footer-logo img {
+            height: 48px;
+        }
+        
+        .footer-description {
+            font-size: 0.95em;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+        
+        .footer-right h4 {
+            color: var(--primary-color);
+            font-size: 1.1em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-right a {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.08em;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-right a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Media queries para ajustes específicos */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 32px;
+            }
+            
+            .stat-number {
+                font-size: 60px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra superior -->
+    <div class="top-bar fixed-top w-100">
+      <div class="container-fluid d-flex justify-content-between align-items-center px-3 py-2 text-white">
+        <div>
+          <span class="me-4"><i class="fas fa-phone me-1"></i> +51 123 456 789</span>
+          <span><i class="fas fa-envelope me-1"></i> info@ejemplo.com</span>
+        </div>
+        <div>
+          <a href="#" class="text-white text-decoration-none me-3">CONTANCTO</a>
+          <a href="#" class="text-white text-decoration-none me-3">ES</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegación principal -->
+    <nav class="navbar navbar-expand-lg main-nav fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://airtificial.com/wp-content/themes/airtificial/img/logo.svg" alt="Logo" class="logo-placeholder">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../intelligent-robots/intelligent-robots.html">intelligent-robots</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="mb-4">AIRTIFICIAL es una compañía global, líder en soluciones tecnológicas para todo tipo de procesos industriales.</h1>
+                        <p class="mb-4">Diferenciación a través del conocimiento y aplicación de tecnología avanzada como inteligencia artificial, robótica colaborativa y visión, entre otras que nos permite proponer soluciones únicas adaptadas a los retos a los que se enfrentan nuestros clientes.</p>
+                        <a href="#" class="btn btn-custom-primary btn-lg">Botón Principal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Estadísticas -->
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row text-center text-white">
+                <div class="col-lg-4 mb-4">
+                    <div class="stat-item">
+                        <div class="stat-number">150</div>
+                        <h3 class="stat-title">Proyectos</h3>
+                        <p class="stat-description">Proyectos completados exitosamente</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="stat-item">
+                        <div class="stat-number">25</div>
+                        <h3 class="stat-title">Años</h3>
+                        <p class="stat-description">Años de experiencia en el mercado</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="stat-item">
+                        <div class="stat-number">500</div>
+                        <h3 class="stat-title">Clientes</h3>
+                        <p class="stat-description">Clientes satisfechos en todo el país</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Imágenes IA -->
+    <section class="ia-section">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-lg-4">
+                    <div class="ia-card">
+                        <a href="#">
+                            <img src="img/1.jpg" alt="Imagen 1">
+                            <div class="ia-card-title">Título de la Imagen 1</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ia-card">
+                        <a href="#">
+                            <img src="img/2.jpg" alt="Imagen 2">
+                            <div class="ia-card-title">Título de la Imagen 2</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="ia-card">
+                        <a href="#">
+                            <img src="img/3.jpg" alt="Imagen 3">
+                            <div class="ia-card-title">Título de la Imagen 3</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Noticias -->
+    <section class="news-section py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <h2 class="news-title text-white text-uppercase">
+                        <span class="news-bar"></span>
+                        Últimas Noticias
+                    </h2>
+                </div>
+                <div class="col-lg-4 text-end">
+                    <a href="#" class="news-link text-white">
+                        Ver todas las noticias
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="news-card">
+                        <div class="news-tags mb-3">
+                            <span class="news-tag">Tecnología</span>
+                        </div>
+                        <h3 class="news-headline text-white">Título de la primera noticia importante</h3>
+                        <p class="news-date">15 de Julio, 2025</p>
+                        <a href="#" class="news-btn text-decoration-none">
+                            Leer más
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="news-card">
+                        <div class="news-tags mb-3">
+                            <span class="news-tag">Innovación</span>
+                        </div>
+                        <h3 class="news-headline text-white">Título de la segunda noticia relevante</h3>
+                        <p class="news-date">12 de Julio, 2025</p>
+                        <a href="#" class="news-btn text-decoration-none">
+                            Leer más
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="custom-secondary py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="footer-left">
+                        <div class="footer-logo mb-3">
+                            <img src="https://airtificial.com/wp-content/themes/airtificial/img/logo-positive.svg" alt="Logo">
+                        </div>
+                        <p class="footer-description text-white">
+                            Descripción de la empresa y sus servicios. Aquí puedes agregar información relevante sobre tu negocio.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer-right">
+                        <h4>Enlaces Rápidos</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="../intelligent-robots/intelligent-robots.html" class="text-white">AIintelligent-Robots</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="border-secondary my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-white mb-0">© 2025 Tu Empresa. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social-links text-end">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
